@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("https://fonts.googleapis.com/css?family=Roboto") format("truetype");
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  transform: translateZ(-100vmin);
+}
+
+.slider-container {
+  position: relative;
+  padding: 1rem;
+  border-radius: 100px;
+  background: hsla(0, 0%, 0%, 0);
+  transition: background 0.2s;
+}
+
+.control:hover {
+  background: hsla(0, 0%, 0%, 0.5);
+}
+
+input[type="range"] {
+  width: 200px;
+  cursor: grab;
+  accent-color: hsl(var(--value, 0) 90% 66%);
+}
+
+input[type="range"]:active {
+  cursor: grabbing;
+}
+
+.tooltip {
+  position: absolute;
+  left: var(--thumb-pos, 0%);
+  bottom: 80%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  aspect-ratio: 4 / 3;
+  background: hsl(0 0% 0%);
+  border: 0.5px solid hsl(0 0% 50%);
+  border-radius: 6px;
+  color: hsl(0 0% 98%);
+  font-size: 1rem;
+  font-variant: tabular-nums;
+  box-shadow: 0 1px hsl(0 0% 100% / 0.75) inset, 0 5px 10px -5px black;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+input[type="range"]:hover + .tooltip,
+input[type="range"]:focus + .tooltip {
+  opacity: 1;
+}
+
+input[type="range"]:hover + .tooltip::after,
+input[type="range"]:focus + .tooltip::after {
+  content: attr(value);
+}
